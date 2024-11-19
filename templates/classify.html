@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Botanic Insight: Herbaceous Species Recognition using CNN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <style>
+        .hero {
+            background: black url(static/images/bg.jpeg) center / cover;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<section class="hero is-fullheight" has-background-black>
+    <section class="section">
+        <div class="container">
+            <h1 class="title" style="font-size:2.5rem">
+                Botanic Insight: Herbaceous Species Recognition using CNN
+            </h1>
+            <p class="subsubtitle">
+                by <strong>Python</strong>
+            </p>
+        </div>
+    </section>
+
+    <div class="columns">
+        <div class="column is-narrow">
+        </div>
+
+        <div class="column is-one-third has-text-centered">
+            <img class="pred_img" src="{{ url_for('send_file', filename=image_file_name)}}"/>
+        </div>
+
+        <div class="column is-half" style="font-size:1.5rem">
+            <h2 id="pred" style="color:white">
+                This is a <span style="font-weight: bold; color:whitesmoke;">{{ label }}</span>
+            </h2>
+
+            <h2 style="font-size: 2rem">
+                Confidence: <span style="font-weight: bold; color:whitesmoke;">{{ prob }}</span>
+            </h2>
+
+            <!-- Display label details based on the predicted label -->
+            <div id="labelDetails" style="color:white; margin-top: 20px;">
+                {% if label == 'Aloevera' %}
+                    <p>USES:treat skin problems (burns, wounds, and anti-inflammatory processes)</p>
+                    <p>DRY-STATE-USES:Aloevera in dry state can be used in the form of fine powder to treat the problems such as  alleviating dry skin, minor cuts, wounds and can also be used for skin treatments. Aloe vera is believed to have oral health benefits, we can use the dry leaf powder to create a mouthwash or toothpaste by mixing it with water or baking soda. This can help freshen breath, reduce plaque buildup, and soothe gum inflammation.</p>
+                {% elif label == 'ashoka' %}
+                    <p>USES:Ashoka helps to gynecological and menstrual problems,irregular periods</p>
+                    <p>DRY-STATE-USES:Ashoka leaves in dry state can be used to make a tea which helps to regulate menstrual cycles, reduce heavy bleeding, and alleviate menstrual pain. This tea can be taken regularly to support overall reproductive health. Drinking Ashoka leaf tea can help improve digestion, reduce bloating, and alleviate constipation. ashoka leaf powder mixed with water can be used for pain relief.</p>
+                {% elif label == 'Bringaraja' %}
+                    <p>USES:hair fall, dandruff, premature graying, and also strengthen hair</p>
+                    <p>DRY-STATE-USES:Bringaraja leaves in dry state can be used in making hair oil as it  promotes hair growth, reduce hair fall, and prevent premature greying, and can also be used as hair mask for strengthening hair roots and adding shine. Drinking Bhringraj tea can aid in detoxification, improve liver function, and support overall health.</p>
+                {% elif label == 'Coriender' %}
+                    <p>USES:boost your immunity,ease digestion, aids blood sugar levels</p>
+                    <p>DRY-STATE-USES:Digestive Aid, Anti-inflammatory, Cholesterol Management, Blood Sugar Control, Antibacterial Properties.</p>
+                {% elif label == 'Curry Leaves' %}
+                    <p>USES:It helps in the treatment of diarrhea, diabetes, morning sickness</p>
+                    <p>DRY-STATE-USES:Digestive Health, Diabetes Management, Hair Health, Eye Health, Liver Health.</p>
+                {% elif label == 'Eucalyptus' %}
+                    <p>USES:eucalyptus steam to help treat bronchitis, coughs</p>
+                    <p>DRY-STATE-USES:Eucalyptus in dry state can be used for Steam Inhalation that helps to relieve congestion, coughs, and sinus infections. These leaves in potpourri blends to create a fresh aroma in the home. Infuse a coconut oil or olive oil with dried eucalyptus leaves to create a massage oil that can help relieve muscle and joint pain.</p>
+                {% elif label == 'Henna' %}
+                    <p>USES:applied directly to the affected area for dandruff,fungal infections</p>
+                    <p>DRY-STATE-USES:Henna leaves in dry state can be used in form of powder to make a hair dye that gives hair a natural reddish-brown color and also conditions and strengthens it. Mix henna powder with neem powder and water to make a paste. Apply it to the scalp to help with scalp infections and soothe irritation. These leaves also contain natural antifungal and antibacterial properties, making them useful for treating skin disorders such as athlete's foot, ringworm, and eczema.</p>
+                {% elif label == 'Hibiscus' %}
+                    <p>USES:treat ailments such as liver problems and high blood pressure</p>
+                    <p>DRY-STATE-USES:Hibiscus in dry state can be used in making tea as hibiscus tea is rich in antioxidants, can help lower blood pressure, and may support heart health, this tea can also help boost the immune system and protect against common colds and infections as it is rich in vitamin C. These leaves can be also used as hair mask that helps in strengthen hair, reduce hair fall, treat scalp issues, and  Natural Dye for fabrics</p>
+                {% elif label == 'Neem' %}
+                    <p>USES:various skin problems like acne, pimples, skin rashes and skin allergies</p>
+                    <p>DRY-STATE-USES:Neem leaves have been traditionally used internally for their medicinal properties. Sprinkle dried neem powder around your garden or plants to act as a natural pesticide and keep pests away. Add dried neem leaves to your bathwater for a relaxing and detoxifying soak that can help soothe skin irritations and infections.</p>
+                {% else %}
+                    <p>USES:hand sanitizer, mouthwash and water purifier as well as in animal rearing, wound healing, the preservation of food stuffs and herbal raw materials and traveler's health.</p>
+                    <p>DRY-STATE-USES:Tulasi leaves in dry state can be used in making herbal tea that can help reduce stress, improve immunity, and aid digestion. Boil dried Tulsi leaves in water and inhale the steam to help relieve respiratory issues such as colds, coughs, and asthma.</p>
+                {% endif %}
+            </div>
+
+            <br>
+            <a href="/" class="button is-black is-inverted is-outlined" style="font-size:1.5rem">Back to Home</a>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+        </div>
+    </section>
+</section>
+
+<script src="/static/script.js"></script>
+
+</body>
+</html>
